@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
+using Microsoft.Maui.Controls;
 using Lab1_Vardzar_2_4.Models;
 
 namespace Lab1_Vardzar_2_4.ViewModels
@@ -16,6 +19,7 @@ namespace Lab1_Vardzar_2_4.ViewModels
                 {
                     _student.FullName = value;
                     OnPropertyChanged(nameof(FullName));
+                    ((Command)AddStudentCommand).ChangeCanExecute();
                 }
             }
         }
@@ -45,6 +49,30 @@ namespace Lab1_Vardzar_2_4.ViewModels
                 }
             }
         }
+
+        public ObservableCollection<Student> Students { get; } = new();
+
+        public ICommand AddStudentCommand { get; }
+
+        public StudentViewModel()
+        {
+            AddStudentCommand = new Command(AddStudent, CanAddStudent);
+        }
+
+        private void AddStudent()
+        {
+            Students.Add(new Student
+            {
+                FullName = FullName,
+                Group = Group,
+                AverageScore = AverageScore
+            });
+
+            FullName = string.Empty;
+            Group = string.Empty;
+        }
+
+        private bool CanAddStudent() => !string.IsNullOrWhiteSpace(FullName);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

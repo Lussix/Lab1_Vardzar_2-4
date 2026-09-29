@@ -24,12 +24,31 @@
                    Keyboard="Numeric" />
 
             <Label Text="{Binding FullName, Mode=OneWay, StringFormat='Студент: {0}'}"
-       FontSize="18"
-       TextColor="Blue" />
+                   FontSize="18"
+                   TextColor="Blue" />
 
             <Label x:Name="GreetingLabel"
                    Text="{Binding Group, StringFormat='Група: {0}'}"
                    FontSize="16" />
+
+            <Button Text="Додати студента"
+                    Command="{Binding AddStudentCommand}" />
+
+            <Label Text="Список студентів:"
+                   FontSize="18"
+                   Margin="0,15,0,0" />
+
+            <CollectionView ItemsSource="{Binding Students}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Padding="0,5">
+                            <Label Text="{Binding FullName}" FontAttributes="Bold" />
+                            <Label Text="{Binding Group, StringFormat='Група: {0}'}" FontSize="13" />
+                            <Label Text="{Binding AverageScore, StringFormat='Середній бал: {0}'}" FontSize="13" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
