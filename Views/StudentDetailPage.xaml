@@ -13,8 +13,18 @@
         <Label Text="{Binding Group, StringFormat='Група: {0}'}"
                FontSize="18" />
 
-        <Label Text="{Binding AverageScore, StringFormat='Середній бал: {0}'}"
-               FontSize="18" />
+        <Label Text="Середній бал:" FontSize="18" />
+
+        <Entry Text="{Binding AverageScore, Mode=TwoWay}"
+               Keyboard="Numeric"
+               Placeholder="Середній бал" />
+
+        <Button Text="Зберегти"
+                Command="{Binding SaveCommand}" />
+
+        <Button Text="Назад"
+                Command="{Binding GoBackCommand}" />
 
     </VerticalStackLayout>
 </ContentPage>
+    

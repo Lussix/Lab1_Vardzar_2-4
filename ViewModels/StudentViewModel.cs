@@ -6,7 +6,7 @@ using Lab1_Vardzar_2_4.Models;
 
 namespace Lab1_Vardzar_2_4.ViewModels
 {
-    public class StudentViewModel : INotifyPropertyChanged
+    public class StudentViewModel : INotifyPropertyChanged, IQueryAttributable 
     {
         private Student _student = new();
 
@@ -53,13 +53,13 @@ namespace Lab1_Vardzar_2_4.ViewModels
         public ObservableCollection<Student> Students { get; } = new();
 
         public ICommand AddStudentCommand { get; }
-        public ICommand OpenDetailsCommand { get; }   // НОВЕ
+        public ICommand OpenDetailsCommand { get; }   
 
         public StudentViewModel()
         {
             AddStudentCommand = new Command(AddStudent, CanAddStudent);
             OpenDetailsCommand = new Command<Student>(async (student) =>
-                await OpenDetailsAsync(student));      // НОВЕ
+                await OpenDetailsAsync(student));      
         }
 
         private void AddStudent()
@@ -89,6 +89,19 @@ namespace Lab1_Vardzar_2_4.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            if (query.TryGetValue("OriginalStudent", out var o) && o is Student original
+                && query.TryGetValue("UpdatedStudent", out var u) && u is Student updated)
+            {
+                var index = Students.IndexOf(original);
+                if (index >= 0)
+                {
+                    Students[index] = updated;
+                }
+            }
+        }
 
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
