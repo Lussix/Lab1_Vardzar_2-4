@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Lab1_Vardzar_2_4.MainPage">
+             x:Class="Lab1_Vardzar_2_4.MainPage"
+             x:Name="MainPageRoot">
 
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="15">
@@ -41,10 +42,14 @@
             <CollectionView ItemsSource="{Binding Students}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout Padding="0,5">
+                        <VerticalStackLayout Padding="0,5" Spacing="3">
                             <Label Text="{Binding FullName}" FontAttributes="Bold" />
                             <Label Text="{Binding Group, StringFormat='Група: {0}'}" FontSize="13" />
                             <Label Text="{Binding AverageScore, StringFormat='Середній бал: {0}'}" FontSize="13" />
+                            <Button Text="Детальніше"
+                                    FontSize="12"
+                                    Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.OpenDetailsCommand}"
+                                    CommandParameter="{Binding .}" />
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -53,4 +58,5 @@
         </VerticalStackLayout>
     </ScrollView>
 
-</ContentPage> 
+</ContentPage>
+    

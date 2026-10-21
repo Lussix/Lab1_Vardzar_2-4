@@ -53,10 +53,13 @@ namespace Lab1_Vardzar_2_4.ViewModels
         public ObservableCollection<Student> Students { get; } = new();
 
         public ICommand AddStudentCommand { get; }
+        public ICommand OpenDetailsCommand { get; }   // НОВЕ
 
         public StudentViewModel()
         {
             AddStudentCommand = new Command(AddStudent, CanAddStudent);
+            OpenDetailsCommand = new Command<Student>(async (student) =>
+                await OpenDetailsAsync(student));      // НОВЕ
         }
 
         private void AddStudent()
@@ -73,10 +76,21 @@ namespace Lab1_Vardzar_2_4.ViewModels
         }
 
         private bool CanAddStudent() => !string.IsNullOrWhiteSpace(FullName);
+        private async Task OpenDetailsAsync(Student student)
+        {
+            if (student is null) return;
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "SelectedStudent", student }
+            };
+
+            await Shell.Current.GoToAsync("studentdetail", parameters);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-} 
+}
