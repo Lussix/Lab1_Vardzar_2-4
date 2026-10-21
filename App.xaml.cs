@@ -1,13 +1,15 @@
-﻿using Lab1_Vardzar_2_4.Views;
-
-namespace Lab1_Vardzar_2_4
+﻿namespace Lab1_Vardzar_2_4
 {
-    public partial class AppShell : Shell
+    public partial class App : Application
     {
-        public AppShell()
+        public App()
         {
             InitializeComponent();
-            Routing.RegisterRoute("studentdetail", typeof(StudentDetailPage));
+        }
+
+        protected override Window CreateWindow(IActivationState? activationState)
+        {
+            return new Window(new AppShell());
         }
     }
 }
