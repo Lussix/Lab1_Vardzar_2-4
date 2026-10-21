@@ -1,17 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Lab1_Vardzar_2_4.Views;
 
 namespace Lab1_Vardzar_2_4
 {
-    public partial class App : Application
+    public partial class AppShell : Shell
     {
-        public App()
+        public AppShell()
         {
             InitializeComponent();
-        }
-
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
+            Routing.RegisterRoute("studentdetail", typeof(StudentDetailPage));
         }
     }
 }
