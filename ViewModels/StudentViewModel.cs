@@ -1,12 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;                 
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Lab1_Vardzar_2_4.Models;
 
 namespace Lab1_Vardzar_2_4.ViewModels
 {
-    public class StudentViewModel : INotifyPropertyChanged, IQueryAttributable 
+    public class StudentViewModel : INotifyPropertyChanged, IQueryAttributable
     {
         private Student _student = new();
 
@@ -53,13 +54,17 @@ namespace Lab1_Vardzar_2_4.ViewModels
         public ObservableCollection<Student> Students { get; } = new();
 
         public ICommand AddStudentCommand { get; }
-        public ICommand OpenDetailsCommand { get; }   
+        public ICommand OpenDetailsCommand { get; }
+        public ICommand LoadCommand { get; }                    
 
         public StudentViewModel()
         {
             AddStudentCommand = new Command(AddStudent, CanAddStudent);
             OpenDetailsCommand = new Command<Student>(async (student) =>
-                await OpenDetailsAsync(student));      
+                await OpenDetailsAsync(student));
+
+            LoadCommand = new Command(() =>
+                Debug.WriteLine($"[VM] LoadCommand: у списку {Students.Count} студентів"));
         }
 
         private void AddStudent()
