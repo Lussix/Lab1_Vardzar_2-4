@@ -4,10 +4,10 @@ namespace Lab1_Vardzar_2_4.Views
 {
     public partial class StudentDetailPage : ContentPage
     {
-        public StudentDetailPage()
+        public StudentDetailPage(StudentDetailViewModel vm)
         {
             InitializeComponent();
-            BindingContext = new StudentDetailViewModel();
+            BindingContext = vm;
         }
     }
 }

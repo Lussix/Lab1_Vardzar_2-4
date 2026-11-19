@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using Lab1_Vardzar_2_4.Models;
+using Lab1_Vardzar_2_4.Services;
 
 namespace Lab1_Vardzar_2_4.ViewModels
 {
     public class StudentDetailViewModel : IQueryAttributable, INotifyPropertyChanged
     {
+        private readonly IAppStateService _state;
         private Student? _original;
         private double _averageScore;
 
@@ -21,6 +23,9 @@ namespace Lab1_Vardzar_2_4.ViewModels
                 {
                     _averageScore = value;
                     OnPropertyChanged(nameof(AverageScore));
+
+                    _state.DraftStudentId = _original?.Id;
+                    _state.DraftAverageScore = value;
                 }
             }
         }
@@ -28,8 +33,10 @@ namespace Lab1_Vardzar_2_4.ViewModels
         public ICommand GoBackCommand { get; }
         public ICommand SaveCommand { get; }
 
-        public StudentDetailViewModel()
+        public StudentDetailViewModel(IAppStateService state)
         {
+            _state = state;
+
             GoBackCommand = new Command(async () =>
                 await Shell.Current.GoToAsync(".."));
 
@@ -44,10 +51,15 @@ namespace Lab1_Vardzar_2_4.ViewModels
                 _original = student;
                 FullName = student.FullName;
                 Group = student.Group;
-                AverageScore = student.AverageScore;
+
+                _averageScore = (_state.DraftStudentId == student.Id
+                                 && _state.DraftAverageScore is double draft)
+                    ? draft
+                    : student.AverageScore;
 
                 OnPropertyChanged(nameof(FullName));
                 OnPropertyChanged(nameof(Group));
+                OnPropertyChanged(nameof(AverageScore));
             }
         }
 
@@ -57,6 +69,7 @@ namespace Lab1_Vardzar_2_4.ViewModels
 
             var updated = new Student
             {
+                Id = _original.Id,
                 FullName = FullName,
                 Group = Group,
                 AverageScore = AverageScore
@@ -67,6 +80,9 @@ namespace Lab1_Vardzar_2_4.ViewModels
                 { "OriginalStudent", _original },
                 { "UpdatedStudent", updated }
             };
+
+            _state.DraftStudentId = null;
+            _state.DraftAverageScore = null;
 
             await Shell.Current.GoToAsync("..", parameters);
         }

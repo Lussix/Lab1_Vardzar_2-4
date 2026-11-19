@@ -1,4 +1,6 @@
 ﻿using Lab1_Vardzar_2_4.Services;
+using Lab1_Vardzar_2_4.ViewModels;
+using Lab1_Vardzar_2_4.Views;
 using Microsoft.Extensions.Logging;
 
 namespace Lab1_Vardzar_2_4
@@ -20,6 +22,9 @@ namespace Lab1_Vardzar_2_4
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddSingleton<IAppStateService, AppStateService>();
+
+            builder.Services.AddTransient<StudentDetailViewModel>();
+            builder.Services.AddTransient<StudentDetailPage>();
 
             return builder.Build();
         }
