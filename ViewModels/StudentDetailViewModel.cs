@@ -67,12 +67,14 @@ namespace Lab1_Vardzar_2_4.ViewModels
         {
             if (_original is null) return;
 
+
             var updated = new Student
             {
                 Id = _original.Id,
                 FullName = FullName,
                 Group = Group,
-                AverageScore = AverageScore
+                AverageScore = AverageScore,
+                StudentCardNumber = _original.StudentCardNumber
             };
 
             var parameters = new Dictionary<string, object>

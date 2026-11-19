@@ -25,18 +25,17 @@ namespace Lab1_Vardzar_2_4
             builder.Services.AddSingleton<IAppStateService, AppStateService>();
 
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "students.db3");
-            builder.Services.AddSingleton<IStudentRepository>(_ => new StudentRepository(dbPath));
-
+            builder.Services.AddSingleton<ICryptoService, CryptoService>();
+            builder.Services.AddSingleton<IStudentRepository>(sp =>
+                new StudentRepository(dbPath, sp.GetRequiredService<ICryptoService>()));
             builder.Services.AddSingleton<ISyncService>(_ => new SyncService(dbPath));
 
             builder.Services.AddSingleton<StudentViewModel>();
             builder.Services.AddSingleton<MainPage>();
 
-           
             builder.Services.AddTransient<StudentDetailViewModel>();
             builder.Services.AddTransient<StudentDetailPage>();
 
-           
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<SettingsPage>();
 

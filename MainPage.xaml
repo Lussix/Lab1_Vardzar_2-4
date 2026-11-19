@@ -28,6 +28,9 @@
             <Entry x:Name="GroupEntry"
                    Text="{Binding Group, Mode=TwoWay}"
                    Placeholder="Група" />
+            <Entry Text="{Binding StudentCardNumber, Mode=TwoWay}"
+       Placeholder="Номер студентського квитка" />
+            
 
             <Entry x:Name="AverageScoreEntry"
                    Text="{Binding AverageScore, Mode=TwoWay}"
@@ -56,6 +59,7 @@
                             <Label Text="{Binding FullName}" FontAttributes="Bold" />
                             <Label Text="{Binding Group, StringFormat='Група: {0}'}" FontSize="13" />
                             <Label Text="{Binding AverageScore, StringFormat='Середній бал: {0}'}" FontSize="13" />
+                            <Label Text="{Binding StudentCardNumber, StringFormat='Квиток: {0}'}" FontSize="13" />
                             <Button Text="Детальніше"
                                     FontSize="12"
                                     Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.OpenDetailsCommand}"

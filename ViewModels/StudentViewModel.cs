@@ -55,9 +55,21 @@ namespace Lab1_Vardzar_2_4.ViewModels
             }
         }
 
+        public string StudentCardNumber
+        {
+            get => _student.StudentCardNumber;
+            set
+            {
+                if (_student.StudentCardNumber != value)
+                {
+                    _student.StudentCardNumber = value;
+                    OnPropertyChanged(nameof(StudentCardNumber));
+                }
+            }
+        }
+
         public ObservableCollection<Student> Students { get; } = new();
 
-      
         public int PendingCount
         {
             get => _pendingCount;
@@ -135,15 +147,17 @@ namespace Lab1_Vardzar_2_4.ViewModels
             {
                 FullName = FullName,
                 Group = Group,
-                AverageScore = AverageScore
+                AverageScore = AverageScore,
+                StudentCardNumber = StudentCardNumber
             };
 
-            await _repository.SaveAsync(student);              
-            Students.Add(student);                             
+            await _repository.SaveAsync(student);                     
+            Students.Add(student);                                    
             await _sync.EnqueueAsync("Student", "Insert", student);   
 
             FullName = string.Empty;
             Group = string.Empty;
+            StudentCardNumber = string.Empty;
         }
 
         private async Task DeleteStudentAsync(Student student)
@@ -176,7 +190,7 @@ namespace Lab1_Vardzar_2_4.ViewModels
             if (query.TryGetValue("UpdatedStudent", out var u) && u is Student updated)
             {
                 _ = UpdateStudentAsync(updated);
-                query.Clear();  
+                query.Clear();   
             }
         }
 
