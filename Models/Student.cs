@@ -1,10 +1,15 @@
-﻿namespace Lab1_Vardzar_2_4.Models
+﻿using SQLite;
+
+namespace Lab1_Vardzar_2_4.Models
 {
+    [Table("Students")]
     public class Student
     {
-        public string FullName { get; set; }
-        public string Group { get; set; }
-        public double AverageScore { get; set; }
+        [PrimaryKey]
         public Guid Id { get; set; } = Guid.NewGuid();
+
+        public string FullName { get; set; } = string.Empty;
+        public string Group { get; set; } = string.Empty;
+        public double AverageScore { get; set; }
     }
 }

@@ -27,6 +27,8 @@ namespace Lab1_Vardzar_2_4
             builder.Services.AddTransient<StudentDetailPage>();
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddTransient<SettingsPage>();
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "students.db3");
+            builder.Services.AddSingleton<IStudentRepository>(_ => new StudentRepository(dbPath));
 
             return builder.Build();
         }
