@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Lab1_Vardzar_2_4.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Lab1_Vardzar_2_4
 {
@@ -18,6 +19,7 @@ namespace Lab1_Vardzar_2_4
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<IAppStateService, AppStateService>();
 
             return builder.Build();
         }
