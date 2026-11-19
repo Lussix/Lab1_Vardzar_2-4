@@ -27,6 +27,8 @@ namespace Lab1_Vardzar_2_4
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "students.db3");
             builder.Services.AddSingleton<IStudentRepository>(_ => new StudentRepository(dbPath));
 
+            builder.Services.AddSingleton<ISyncService>(_ => new SyncService(dbPath));
+
             builder.Services.AddSingleton<StudentViewModel>();
             builder.Services.AddSingleton<MainPage>();
 

@@ -14,6 +14,13 @@
             <Button Text="Налаштування"
                     Command="{Binding OpenSettingsCommand}" />
 
+            <Label Text="{Binding SyncStatus}"
+       FontSize="14"
+       FontAttributes="Bold" />
+
+            <Button Text="Синхронізувати"
+        Command="{Binding SyncCommand}" /> 
+
             <Entry x:Name="FullNameEntry"
                    Text="{Binding FullName, Mode=TwoWay}"
                    Placeholder="ПІБ студента" />
