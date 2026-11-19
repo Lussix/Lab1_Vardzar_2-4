@@ -15,6 +15,7 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
+        ThemeService.LoadSaved();
         var window = new Window(new AppShell());
 
         Debug.WriteLine("[LIFECYCLE] CreateWindow: вікно створено");

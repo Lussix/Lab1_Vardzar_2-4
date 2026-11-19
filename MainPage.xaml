@@ -11,6 +11,9 @@
                    FontSize="22"
                    HorizontalOptions="Center" />
 
+            <Button Text="Налаштування"
+                    Command="{Binding OpenSettingsCommand}" />
+
             <Entry x:Name="FullNameEntry"
                    Text="{Binding FullName, Mode=TwoWay}"
                    Placeholder="ПІБ студента" />
@@ -26,7 +29,7 @@
 
             <Label Text="{Binding FullName, Mode=OneWay, StringFormat='Студент: {0}'}"
                    FontSize="18"
-                   TextColor="Blue" />
+                   TextColor="{AppThemeBinding Light=Blue, Dark=LightSkyBlue}" />
 
             <Label x:Name="GreetingLabel"
                    Text="{Binding Group, StringFormat='Група: {0}'}"
@@ -59,4 +62,3 @@
     </ScrollView>
 
 </ContentPage>
-    

@@ -25,6 +25,8 @@ namespace Lab1_Vardzar_2_4
 
             builder.Services.AddTransient<StudentDetailViewModel>();
             builder.Services.AddTransient<StudentDetailPage>();
+            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<SettingsPage>();
 
             return builder.Build();
         }

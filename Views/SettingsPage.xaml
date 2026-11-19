@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab1_Vardzar_2_4.Views.SettingsPage"
+             Title="Налаштування">
+    <VerticalStackLayout Padding="20" Spacing="14">
+        <Label Text="Тема оформлення" FontSize="20" FontAttributes="Bold" />
+
+        <HorizontalStackLayout Spacing="10">
+            <Label Text="Темна тема" VerticalOptions="Center" />
+            <Switch IsToggled="{Binding IsDark, Mode=TwoWay}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

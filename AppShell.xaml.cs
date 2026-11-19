@@ -7,6 +7,7 @@ namespace Lab1_Vardzar_2_4
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute("settings", typeof(SettingsPage));
             Routing.RegisterRoute("studentdetail", typeof(StudentDetailPage));
         }
     }

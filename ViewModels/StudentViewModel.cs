@@ -55,7 +55,8 @@ namespace Lab1_Vardzar_2_4.ViewModels
 
         public ICommand AddStudentCommand { get; }
         public ICommand OpenDetailsCommand { get; }
-        public ICommand LoadCommand { get; }                    
+        public ICommand LoadCommand { get; }
+        public ICommand OpenSettingsCommand { get; } 
 
         public StudentViewModel()
         {
@@ -65,6 +66,8 @@ namespace Lab1_Vardzar_2_4.ViewModels
 
             LoadCommand = new Command(() =>
                 Debug.WriteLine($"[VM] LoadCommand: у списку {Students.Count} студентів"));
+            OpenSettingsCommand = new Command(async () =>
+           await Shell.Current.GoToAsync("settings")); 
         }
 
         private void AddStudent()
