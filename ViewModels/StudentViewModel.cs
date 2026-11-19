@@ -67,7 +67,15 @@ namespace Lab1_Vardzar_2_4.ViewModels
             LoadCommand = new Command(() =>
                 Debug.WriteLine($"[VM] LoadCommand: у списку {Students.Count} студентів"));
             OpenSettingsCommand = new Command(async () =>
-           await Shell.Current.GoToAsync("settings")); 
+           await Shell.Current.GoToAsync("settings"));
+           
+            Students.Add(new Student
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                FullName = "Іваненко Іван",
+                Group = "ІТ-21",
+                AverageScore = 85
+            });
         }
 
         private void AddStudent()
