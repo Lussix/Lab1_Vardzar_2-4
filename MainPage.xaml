@@ -53,6 +53,10 @@
                                     FontSize="12"
                                     Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.OpenDetailsCommand}"
                                     CommandParameter="{Binding .}" />
+                            <Button Text="Видалити"
+                                    FontSize="12"
+                                    Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.DeleteStudentCommand}"
+                                    CommandParameter="{Binding .}" />
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

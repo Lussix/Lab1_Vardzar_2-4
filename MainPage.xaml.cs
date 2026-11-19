@@ -6,11 +6,9 @@ namespace Lab1_Vardzar_2_4
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public MainPage(StudentViewModel vm)
         {
             InitializeComponent();
-
-            var vm = new StudentViewModel();
             BindingContext = vm;
             DeepLinkHandler.Main = vm;   
         }
@@ -24,7 +22,6 @@ namespace Lab1_Vardzar_2_4
 
             Debug.WriteLine("[PAGE] MainPage з'явилась");
 
-           
             MainThread.BeginInvokeOnMainThread(async () => await DeepLinkHandler.TryProcessAsync());
         }
 
